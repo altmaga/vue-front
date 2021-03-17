@@ -22,7 +22,7 @@ Router definitions
             name: 'User',
             component: () => import('../views/User.vue'),
             meta: { 
-                requireAuth: true
+                requiresAuth: true
             }
         }
     ]
@@ -38,31 +38,18 @@ Router definitions
 Set up router Auth Guard
 */
     router.beforeEach((to, from, next) => {
-        // Check route meta
-        if (to.meta.requireAuth){
-            // Fetch api/auth/login
-            fetch( 'http://localhost:8769/auth/me', {
-                method: "GET",
-                credentials: "include"
-            })
-            .then( response => {
-                // Check API response: redirect to '/' if response not OK
-                return !response.ok
-                ? next({ name: 'Home', query: { redirect: to.fullPath } })
-                : response.json(response)
-            })
-            .then( apiResponse => {
-                // Commit store change
-                store.dispatch('setUser', apiResponse.data)
+        if (to.matched.some((record) => record.meta.requiresAuth)) {
+            if (store.getters.isAuthenticated) {
+                next();
+                return;
+            }
 
-                // Display protected vue
-                return next();
-            })
-            .catch( () => next({ name: 'Home', query: { redirect: to.fullPath } }))
-            
+            next("/");
+        } 
+        else {
+            next();
         }
-        else{ return next() }
-    })
+    });
 //
 
 /* 

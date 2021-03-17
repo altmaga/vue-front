@@ -24,10 +24,11 @@
     },
 
     created(){
+
       this.$store.subscribe((mutations,/*  state */) => {
         // Check mutation*/
         if( mutations.type === "USER" ){
-            // Redirect user
+            // Update display
             this.$router.push('/user')
         }
       })
@@ -36,7 +37,6 @@
     methods:{
       getFormSubmit(event){
         event.preventDefault();
-
         this.$store.dispatch('logUser', { email: this.loginEmail, password: this.loginPassword })
       }
     },

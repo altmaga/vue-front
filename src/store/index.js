@@ -1,64 +1,29 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+/* 
+Imports and config
+*/
+    // Vue
+    import Vuex from "vuex";
+    import Vue from "vue";
+    import createPersistedState from "vuex-persistedstate";
 
-Vue.use(Vuex)
+    // Inner
+    import auth from "./modules/auth";
 
-export default new Vuex.Store({
-    state: {
-        user: undefined
-    },
-    
-    getters: {
-        getUser(state){ return state.user }
-    },
+    // Set up Vuex
+    Vue.use(Vuex);
+//
 
-    mutations: {
-        USER( state, payload ){ state.user = payload.data }
-    },
 
-    actions: {
-        setUser(context, data){
-            context.commit('USER', { data })
+
+/* 
+Export store
+*/
+    export default new Vuex.Store({
+        modules: {
+            auth,
         },
-
-        checkUser(context){
-            // Fetch api/auth/login
-            fetch( 'http://localhost:8769/auth/me', {
-                method: "GET",
-                credentials: "include"
-            })
-            .then( response => {
-                return !response.ok
-                ? console.log(response)
-                : response.json(response)
-            })
-            .then( apiResponse => {
-                console.log(apiResponse)
-                context.commit('USER', { data: apiResponse })
-            })
-            .catch( apiError => console.log(apiError))
-        },
-
-        logUser(context, data){
-            // Fetch api/auth/login
-            fetch( 'http://localhost:8769/auth/login', {
-                method: "POST",
-                body: JSON.stringify({ email: data.email, password: data.password }),
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: "include"
-            })
-            .then( response => {
-                return !response.ok
-                ? console.log(response)
-                : response.json(response)
-            })
-            .then( apiResponse => {
-                console.log(apiResponse)
-                context.commit('USER', { data: apiResponse.data })
-            })
-            .catch( apiError => console.log(apiError))
-        }
-    },
-})
+        plugins: [
+            createPersistedState()
+        ]
+    });
+//
