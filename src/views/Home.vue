@@ -24,11 +24,16 @@
     },
 
     created(){
-      
+      this.$store.subscribe((mutations,/*  state */) => {
+        // Check mutation*/
+        if( mutations.type === "USER" ){
+            // Redirect user
+            this.$router.push('/user')
+        }
+      })
     },
 
     methods:{
-
       getFormSubmit(event){
         event.preventDefault();
 

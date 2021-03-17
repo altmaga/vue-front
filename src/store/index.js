@@ -17,6 +17,10 @@ export default new Vuex.Store({
     },
 
     actions: {
+        setUser(context, data){
+            context.commit('USER', { data })
+        },
+
         checkUser(context){
             // Fetch api/auth/login
             fetch( 'http://localhost:8769/auth/me', {

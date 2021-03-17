@@ -25,7 +25,6 @@
       }
     },
     created(){
-      this.$store.dispatch('checkUser')
 
       this.$store.subscribe((mutations,/*  state */) => {
         // Check mutation*/
