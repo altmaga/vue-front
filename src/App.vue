@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <HeaderApp/>
+    
     <main>
       <router-view :key="$route.fullPath"></router-view>
     </main>
@@ -25,13 +26,11 @@
       }
     },
     created(){
-
-      this.$store.subscribe((mutations,/*  state */) => {
-        // Check mutation*/
+      this.$store.subscribe((mutations) => {
+        // Check mutations
         if( mutations.type === "USER" ){
             // Update display
             this.user = mutations.payload.data;
-            console.log(this.user)
         }
       })
     }

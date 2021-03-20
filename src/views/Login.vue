@@ -1,7 +1,7 @@
 <template>
   <main>
-    <p>Login</p>
-    <FormLogin/>
+    <h1>Login page</h1>
+    <FormLogin />
   </main>
 </template>
 
@@ -12,13 +12,20 @@
     components: {
       FormLogin
     },
-
     data(){
       return {}
     },
-
     methods:{},
-    created(){},
+
+    created(){
+      this.$store.subscribe((mutations) => {
+        // Check mutations
+        if( mutations.type === "USER" ){
+            // Redirect user when connected
+            this.$router.push('/')
+        }
+      })
+    },
     mounted(){},
     destroyed(){}
   };

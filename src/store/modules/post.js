@@ -14,7 +14,7 @@ export default {
     actions: {
         fetchPostList(context){
             // Fetch api/auth/login
-            fetch( 'http://localhost:8769/v1/post', {
+            fetch( `${process.env.VUE_APP_API_URL}/v1/post`, {
                 method: "GET"
             })
             .then( response => {

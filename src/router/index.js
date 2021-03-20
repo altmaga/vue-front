@@ -4,11 +4,10 @@ Imports and config
     // Vue
     import Vue from 'vue';
     import VueRouter from 'vue-router';
-    Vue.use(VueRouter)
+    Vue.use(VueRouter);
 
     // Inner
     import store from '../store';
-    console.log(store)
 //
 
 /* 
@@ -20,7 +19,7 @@ Router definitions
             path: '/',
             name: 'Home',
             component: () => import('../views/Home.vue'),
-            meta: { 
+            meta: {
                 requiresAuth: true
             }
         },
@@ -30,9 +29,9 @@ Router definitions
             component: () => import('../views/Login.vue')
         },
         {
-            path: '/add/post',
-            name: 'AddPost',
-            component: () => import('../views/AddPost.vue')
+            path: '*',
+            name: 'NotFound',
+            component: () => import('../views/NotFound.vue')
         }
     ]
 
@@ -43,34 +42,21 @@ Router definitions
     })
 //
 
+
 /* 
-Set up router Auth Guard
+Set basic AuthGuard
 */
     router.beforeEach((to, from, next) => {
-        console.log((to, from, next))
-        
-        if (to.matched.some((record) => record.meta.requiresAuth)) {
-            console.log('requiresAuth: is not Authenticated', store.getters.isAuthenticated)
-            if(store.getters.isAuthenticated === false){
-                // next({ path: '/add/post' });
-                next();
-                return;
-            }
+        // Set auth values
+        const authenticatedUser = store.getters.isAuthenticated;
+        const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
-            /* if (store.getters.isAuthenticated === false) {
-                console.log('requiresAuth: is not Authenticated', store.getters.isAuthenticated)
-                next({ name: 'Login' });
-                return;
-            }
-            else{
-                console.log('requiresAuth: is Authenticated', store.getters.isAuthenticated)
-                
-                next();
-                return;
-            } */
-        }
+        // Check for protected route
+        if (requiresAuth && !authenticatedUser) next({ path: '/login' })
+        else next();
     });
 //
+
 
 /* 
 Export Router

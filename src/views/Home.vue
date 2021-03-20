@@ -1,7 +1,6 @@
 <template>
   <main>
-    <h1>User</h1>
-    <button @click="logOut()" type="button">Logout</button>
+    <h1>Home page</h1>
   </main>
 </template>
 
@@ -10,15 +9,11 @@
   export default {
     name: "Home",
     components: {},
-    methods:{
-      logout(){
-        this.$store.dispatch('logOut')
-      }
-    },
-
     data(){
       return {}
     },
+    methods:{},
+
     created(){},
     mounted(){},
     destroyed(){}

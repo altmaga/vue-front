@@ -1,14 +1,10 @@
 export default {
     state: {
-        isAuth: false,
         user: undefined
     },
     
     getters: {
-        isAuthenticated: (state) => {
-            console.log(state.user)
-            return !!state.user
-        },
+        isAuthenticated: (state) => !!state.user,
         getUser: (state) => state.user 
     },
 
@@ -25,7 +21,7 @@ export default {
         checkUser(context){
             console.log('checkUser')
             // Fetch api/auth/login
-            fetch( 'http://localhost:8769/auth/me', {
+            fetch( `${process.env.VUE_APP_API_URL}/auth/me`, {
                 method: "GET",
                 credentials: "include"
             })
@@ -43,7 +39,7 @@ export default {
 
         logUser(context, data){
             // Fetch api/auth/login
-            fetch( 'http://localhost:8769/auth/login', {
+            fetch( `${process.env.VUE_APP_API_URL}/auth/login`, {
                 method: "POST",
                 body: JSON.stringify({ email: data.email, password: data.password }),
                 headers: {
@@ -65,7 +61,7 @@ export default {
 
         logoutUser(context){
             // Fetch api/auth/login
-            fetch( 'http://localhost:8769/auth/logout', {
+            fetch( `${process.env.VUE_APP_API_URL}/auth/logout`, {
                 method: "GET"
             })
             .then( response => {
@@ -75,7 +71,7 @@ export default {
             })
             .then( async (/* apiResponse */) => {
                 // Commit changes
-                await context.commit('USER', { data: null })
+                await context.commit('USER', { data: undefined })
             })
             .catch( apiError => console.log(apiError))
         }
