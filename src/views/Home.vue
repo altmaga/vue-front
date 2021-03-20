@@ -1,29 +1,33 @@
 <template>
   <main>
     <h1>Home page</h1>
+    <ListPost :postCollection="postCollection" />
   </main>
 </template>
 
 <script>
-/* import mapActions from 'vuex' */
+  import ListPost from '../components/ListPost';
+
   export default {
     name: "Home",
-    components: {},
+    components: {
+      ListPost
+    },
     data(){
       return {
-        postList: undefined
+        postCollection: undefined
       }
     },
     methods:{},
 
     created(){
+      this.$store.dispatch('fetchPostList');
+
       this.$store.subscribe((mutations) => {
         // Check mutations
         if( mutations.type === "POSTLIST" ){
             // Update post list
-            this.postList = mutations.payload.data;
-
-            console.log(this.postList)
+            this.postCollection = mutations.payload.data;
         }
       })
     },

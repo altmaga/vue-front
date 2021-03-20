@@ -26,7 +26,7 @@
       }
     },
     created(){
-      this.$store.dispatch('fetchPostList')
+      // this.$store.dispatch('fetchPostList')
       /* this.$store.subscribe((mutations) => {
         // Check mutations
         if( mutations.type === "USER" ){

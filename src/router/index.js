@@ -28,6 +28,13 @@ Router definitions
             name: 'Login',
             component: () => import('../views/Login.vue')
         },
+
+        {
+            path: '/post/:id',
+            name: 'Post',
+            component: () => import('../views/Post.vue')
+        },
+
         {
             path: '*',
             name: 'NotFound',

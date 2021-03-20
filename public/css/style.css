@@ -145,3 +145,20 @@ Global
         width: 100%;
     }
 /**/
+
+/* 
+Post
+*/
+    .postList ul{
+        margin: 0;
+    }
+
+    .postList li{
+        list-style: none;
+        margin: 1rem 0 0 0;
+    }
+
+    .postList .button{
+        margin-left: .5rem;
+    }
+/**/
