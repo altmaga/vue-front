@@ -5,7 +5,10 @@ export default {
     },
     
     getters: {
-        isAuthenticated: (state) => !!state.user,
+        isAuthenticated: (state) => {
+            console.log(state.user)
+            return !!state.user
+        },
         getUser: (state) => state.user 
     },
 
@@ -20,6 +23,7 @@ export default {
         },
 
         checkUser(context){
+            console.log('checkUser')
             // Fetch api/auth/login
             fetch( 'http://localhost:8769/auth/me', {
                 method: "GET",
@@ -55,6 +59,23 @@ export default {
             .then( async apiResponse => {
                 // Commit changes
                 await context.commit('USER', { data: apiResponse.data })
+            })
+            .catch( apiError => console.log(apiError))
+        },
+
+        logoutUser(context){
+            // Fetch api/auth/login
+            fetch( 'http://localhost:8769/auth/logout', {
+                method: "GET"
+            })
+            .then( response => {
+                return !response.ok
+                ? console.log(response)
+                : response.json(response)
+            })
+            .then( async (/* apiResponse */) => {
+                // Commit changes
+                await context.commit('USER', { data: null })
             })
             .catch( apiError => console.log(apiError))
         }

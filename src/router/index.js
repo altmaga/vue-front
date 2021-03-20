@@ -1,10 +1,14 @@
 /* 
 Imports and config
 */
+    // Vue
     import Vue from 'vue';
     import VueRouter from 'vue-router';
-import store from '../store';
     Vue.use(VueRouter)
+
+    // Inner
+    import store from '../store';
+    console.log(store)
 //
 
 /* 
@@ -16,14 +20,19 @@ Router definitions
             path: '/',
             name: 'Home',
             component: () => import('../views/Home.vue'),
-        },
-        {
-            path: '/user',
-            name: 'User',
-            component: () => import('../views/User.vue'),
             meta: { 
                 requiresAuth: true
             }
+        },
+        {
+            path: '/login',
+            name: 'Login',
+            component: () => import('../views/Login.vue')
+        },
+        {
+            path: '/add/post',
+            name: 'AddPost',
+            component: () => import('../views/AddPost.vue')
         }
     ]
 
@@ -38,16 +47,27 @@ Router definitions
 Set up router Auth Guard
 */
     router.beforeEach((to, from, next) => {
+        console.log((to, from, next))
+        
         if (to.matched.some((record) => record.meta.requiresAuth)) {
-            if (store.getters.isAuthenticated) {
+            console.log('requiresAuth: is not Authenticated', store.getters.isAuthenticated)
+            if(store.getters.isAuthenticated === false){
+                // next({ path: '/add/post' });
                 next();
                 return;
             }
 
-            next("/");
-        } 
-        else {
-            next();
+            /* if (store.getters.isAuthenticated === false) {
+                console.log('requiresAuth: is not Authenticated', store.getters.isAuthenticated)
+                next({ name: 'Login' });
+                return;
+            }
+            else{
+                console.log('requiresAuth: is Authenticated', store.getters.isAuthenticated)
+                
+                next();
+                return;
+            } */
         }
     });
 //

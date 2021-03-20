@@ -1,20 +1,15 @@
 <template>
   <main>
-    <h1>User</h1>
-    <button @click="logOut()" type="button">Logout</button>
+    <h1>Add post</h1>
   </main>
 </template>
 
 <script>
 /* import mapActions from 'vuex' */
   export default {
-    name: "Home",
+    name: "AddPost",
     components: {},
-    methods:{
-      logout(){
-        this.$store.dispatch('logOut')
-      }
-    },
+    methods:{},
 
     data(){
       return {}
