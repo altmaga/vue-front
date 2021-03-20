@@ -1,7 +1,7 @@
 <template>
   <header class="flexBox flexColumn">
       <nav class="flexBox flexCenter">
-          <h1>VueJS Boiler plate by <a href="https://dwsapp.io" target="_blank">dwsapp.io</a> <span v-if="subTitle">{{subTitle}}</span></h1>
+          <h1>VueJS Boilerplate by <a href="https://dwsapp.io" target="_blank">dwsapp.io</a> <span v-if="subTitle">{{subTitle}}</span></h1>
 
           <router-link to="/" class="button"><i class="fas fa-list"></i></router-link>
           <button v-if="isAuth" type="button" class="button" v-on:click="logoutUser"><i class="fas fa-sign-out-alt"></i></button>
@@ -20,20 +20,13 @@
             }
         },
         methods: {
-            logoutUser(){
-                this.$store.dispatch('logoutUser');
-            },
-
-            setPageTitle(){
-
-            }
+            // Method to logout user with store action
+            logoutUser(){ this.$store.dispatch('logoutUser') }
         },
 
         watch:{
+            // Watch route value changes to display the header sub-title
             $route(to, from){
-                console.log('to', to.name)
-                console.log('from', from)
-
                 // Switch route name
                 switch(to.name){
                     case 'NotFound':
@@ -60,7 +53,7 @@
         },
 
         created(){
-
+            // Subscribe to store mutations
             this.$store.subscribe((mutations) => {
                 // Check mutations
                 if( mutations.type === "USER" ){
@@ -68,7 +61,7 @@
                     this.isAuth = this.$store.getters.isAuthenticated;
                     
                     // Redirect user when connected
-                    this.$router.push('/login').catch(()=>{})
+                    this.$router.push('/login').catch( () => {} )
                 }
             })
         },

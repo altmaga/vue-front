@@ -17,12 +17,10 @@
     methods:{},
 
     created(){
+      // Subscribe to store mutations
       this.$store.subscribe((mutations) => {
-        // Check mutations
-        if( mutations.type === "USER" ){
-            // Redirect user when connected
-            this.$router.push('/').catch(()=>{})
-        }
+        // Redirect user when connected
+        if( mutations.type === "USER" ){ this.$router.push('/').catch( () => {} ) }
       })
     },
     mounted(){},

@@ -20,14 +20,13 @@
     methods:{},
 
     created(){
+      // Fetch post from the API
       this.$store.dispatch('fetchPostList');
 
+      // Subscribe to store mutations
       this.$store.subscribe((mutations) => {
-        // Check mutations
-        if( mutations.type === "POSTLIST" ){
-            // Update post list
-            this.postCollection = mutations.payload.data;
-        }
+        // Update post list
+        if( mutations.type === "POSTLIST" ){ this.postCollection = mutations.payload.data }
       })
     },
     mounted(){},

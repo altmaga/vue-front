@@ -20,6 +20,7 @@ Router definitions
             name: 'Home',
             component: () => import('../views/Home.vue'),
             meta: {
+                // Define protected route
                 requiresAuth: true
             }
         },
@@ -30,12 +31,14 @@ Router definitions
         },
 
         {
+            // Define a route param
             path: '/post/:id',
             name: 'Post',
             component: () => import('../views/Post.vue')
         },
 
         {
+            // Catch undefined views
             path: '*',
             name: 'NotFound',
             component: () => import('../views/NotFound.vue')
@@ -51,7 +54,7 @@ Router definitions
 
 
 /* 
-Set basic AuthGuard
+Set basic AuthGuard with store getters
 */
     router.beforeEach((to, from, next) => {
         // Set auth values

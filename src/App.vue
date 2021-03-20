@@ -21,19 +21,8 @@
       FooterApp
     },
     data(){
-      return{
-        user: undefined
-      }
+      return{}
     },
-    created(){
-      // this.$store.dispatch('fetchPostList')
-      /* this.$store.subscribe((mutations) => {
-        // Check mutations
-        if( mutations.type === "USER" ){
-            // Update display
-            this.user = mutations.payload.data;
-        }
-      }) */
-    }
+    created(){}
   }
 </script>

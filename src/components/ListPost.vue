@@ -1,13 +1,13 @@
 <template>
   <ul class="postList">
-      <li v-for="item of postCollection" :key="item._id">
-          <ul class="flexBox flexCenter spaceBetween">
-              <li>{{item.headline}}</li>
-              <li>
-                  <router-link :to="'/post/'+ item._id" class="button"><i class="fas fa-link"></i></router-link>
-              </li>
-          </ul>
-      </li>
+    <li v-for="item of postCollection" :key="item._id">
+      <ul class="flexBox flexCenter spaceBetween">
+        <li>{{item.headline}}</li>
+        <li>
+          <router-link :to="'/post/'+ item._id" class="button"><i class="fas fa-link"></i></router-link>
+        </li>
+      </ul>
+    </li>
   </ul>
 </template>
 
@@ -16,7 +16,10 @@
   export default {
     name: "ListPost",
     components: {},
+
+    // Bind parent component data with properties
     props: ['postCollection'],
+    
     data(){
       return {}
     },

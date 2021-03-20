@@ -22,11 +22,8 @@
 
       // Subscribe to store mutations
       this.$store.subscribe((mutations) => {
-        // Check mutations
-        if( mutations.type === "SINGLEPOST" ){
-          // Set post data
-          this.post = mutations.payload.data;
-        }
+        // Set post data
+        if( mutations.type === "SINGLEPOST" ){ this.post = mutations.payload.data }
       })
     },
     mounted(){},

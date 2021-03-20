@@ -1,78 +1,51 @@
 export default {
     state: {
-        user: undefined
+        // Define states
+        user: undefined,
     },
     
     getters: {
+        // Define getters
+        getUser: (state) => state.user,
         isAuthenticated: (state) => !!state.user,
-        getUser: (state) => state.user 
     },
 
     mutations: {
+        // Define mutations
         USER( state, payload ){ state.user = payload.data },
     },
 
     actions: {
-        async setUser(context, data){
-            // Commit changes
-            await context.commit('USER', { data })
-        },
-
+        // [AUTH] Method to get user data from JWT
         checkUser(context){
-            // Fetch api/auth/login
-            fetch( `${process.env.VUE_APP_API_URL}/auth/me`, {
-                method: "GET",
-                credentials: "include"
-            })
-            .then(response => {
-                return !response.ok
-                ? console.log(response)
-                : response.json(response)
-            })
-            .then(  async apiResponse => {
-                // Commit changes
-                await context.commit('USER', { data: apiResponse })
-            })
-            .catch( apiError => console.log(apiError))
+            fetch( `${process.env.VUE_APP_API_URL}/auth/me`, { method: `GET`, credentials: `include`}) //=> Fetch API
+            .then( response => !response.ok ? console.log(response) : response.json(response)) //=> Check response
+            .then(  async apiResponse => await context.commit(`USER`, { data: apiResponse })) //=> Commit changes
+            .catch( apiError => console.log(apiError)) //=> Catch error
         },
 
+        // [AUTH] Method to log user with credentials
         logUser(context, data){
-            // Fetch api/auth/login
+            //=> Fetch API
             fetch( `${process.env.VUE_APP_API_URL}/auth/login`, {
-                method: "POST",
+                method: `POST`,
                 body: JSON.stringify({ email: data.email, password: data.password }),
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                credentials: "include"
+                credentials: `include`
             })
-            .then( response => {
-                return !response.ok
-                ? console.log(response)
-                : response.json(response)
-            })
-            .then( async apiResponse => {
-                // Commit changes
-                await context.commit('USER', { data: apiResponse.data })
-            })
-            .catch( apiError => console.log(apiError))
+            .then( response => !response.ok ? console.log(response) : response.json(response)) //=> Check response
+            .then( async apiResponse => await context.commit(`USER`, { data: apiResponse.data })) //=> Commit changes
+            .catch( apiError => console.log(apiError)) //=> Catch error
         },
 
+        //[AUTH] Method to logout user
         logoutUser(context){
-            // Fetch api/auth/login
-            fetch( `${process.env.VUE_APP_API_URL}/auth/logout`, {
-                method: "GET"
-            })
-            .then( response => {
-                return !response.ok
-                ? console.log(response)
-                : response.json(response)
-            })
-            .then( async (/* apiResponse */) => {
-                // Commit changes
-                await context.commit('USER', { data: undefined })
-            })
-            .catch( apiError => console.log(apiError))
+            fetch( `${process.env.VUE_APP_API_URL}/auth/logout`, {  method: `GET` }) //=> Fetch API
+            .then( response => !response.ok ? console.log(response) : response.json(response)) //=> Check response
+            .then( async (apiResponse) => await context.commit(`USER`, { data: undefined })) //=> Commit changes
+            .catch( apiError => console.log(apiError)) // Catch error
         }
     }
 }
