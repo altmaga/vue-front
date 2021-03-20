@@ -1,6 +1,6 @@
 <template>
-  <main>
-    <h1>404 page not found</h1>
+  <main class="flexBox flexColumn">
+    <h2 class="notFoundTitle">404 page not found</h2>
   </main>
 </template>
 

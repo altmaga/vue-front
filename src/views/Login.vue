@@ -1,6 +1,5 @@
 <template>
   <main>
-    <h1>Login page</h1>
     <FormLogin />
   </main>
 </template>

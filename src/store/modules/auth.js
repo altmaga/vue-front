@@ -19,7 +19,6 @@ export default {
         },
 
         checkUser(context){
-            console.log('checkUser')
             // Fetch api/auth/login
             fetch( `${process.env.VUE_APP_API_URL}/auth/me`, {
                 method: "GET",

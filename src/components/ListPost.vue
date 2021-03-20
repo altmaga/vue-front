@@ -5,7 +5,6 @@
               <li>{{item.headline}}</li>
               <li>
                   <router-link :to="'/post/'+ item._id" class="button"><i class="fas fa-link"></i></router-link>
-                  <a href="#" class="button"><i class="fas fa-trash-alt"></i></a>
               </li>
           </ul>
       </li>
