@@ -22,7 +22,7 @@
         // Check mutations
         if( mutations.type === "USER" ){
             // Redirect user when connected
-            this.$router.push('/')
+            this.$router.push('/').catch(()=>{})
         }
       })
     },

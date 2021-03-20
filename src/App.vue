@@ -26,13 +26,14 @@
       }
     },
     created(){
-      this.$store.subscribe((mutations) => {
+      this.$store.dispatch('fetchPostList')
+      /* this.$store.subscribe((mutations) => {
         // Check mutations
         if( mutations.type === "USER" ){
             // Update display
             this.user = mutations.payload.data;
         }
-      })
+      }) */
     }
   }
 </script>

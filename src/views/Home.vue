@@ -10,11 +10,23 @@
     name: "Home",
     components: {},
     data(){
-      return {}
+      return {
+        postList: undefined
+      }
     },
     methods:{},
 
-    created(){},
+    created(){
+      this.$store.subscribe((mutations) => {
+        // Check mutations
+        if( mutations.type === "POSTLIST" ){
+            // Update post list
+            this.postList = mutations.payload.data;
+
+            console.log(this.postList)
+        }
+      })
+    },
     mounted(){},
     destroyed(){}
   };

@@ -19,7 +19,7 @@
         },
         methods: {
             logoutUser(){
-                this.$store.dispatch('logoutUser')
+                this.$store.dispatch('logoutUser');
             }
         },
 
@@ -31,7 +31,7 @@
                     this.isAuth = this.$store.getters.isAuthenticated;
                     
                     // Redirect user when connected
-                    this.$router.push('/login')
+                    this.$router.push('/login').catch(()=>{})
                 }
             })
         },
