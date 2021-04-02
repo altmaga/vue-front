@@ -4,7 +4,7 @@ export default {
         postList: undefined,
         singlePost: undefined,
     },
-    
+
     getters: {
         // Define getters
         getPostList: (state) => state.postList,
@@ -20,7 +20,7 @@ export default {
     actions: {
         // [CRUD] GET Method to get post list
         fetchPostList(context){
-            fetch( `${process.env.VUE_APP_API_URL}/v1/post`, { method: `GET` }) //=> Fetch API
+            fetch( `${process.env.VUE_APP_API_URL}/api/post`, { method: `GET` }) //=> Fetch API
             .then( response => !response.ok ? console.log(response) : response.json(response)) //=> Check response
             .then( async (apiResponse) => await context.commit(`POSTLIST`, { data: apiResponse.data })) //=> Commit changes
             .catch( apiError => console.log(apiError)) //=> Catch error
@@ -28,7 +28,7 @@ export default {
 
         //[CRUD] GET Method to get post data from ID
         fetchSinglePost(context, id){
-            fetch( `${process.env.VUE_APP_API_URL}/v1/post/${id}`, { method: `GET` }) //=> Fetch API
+            fetch( `${process.env.VUE_APP_API_URL}/api/post/${id}`, { method: `GET` }) //=> Fetch API
             .then( response => !response.ok ? console.log(response) : response.json(response)) //=> Check response
             .then( async (apiResponse) => await context.commit(`SINGLEPOST`, { data: apiResponse.data })) //=> Commit changes
             .catch( apiError => console.log(apiError)) //=> Catch error
