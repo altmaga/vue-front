@@ -54,3 +54,5 @@ En informatique un "Boilerplate" est un code de départ qui permet d'initier un 
 ```bash
 npm run serve
 ```
+
+# Alice Mouchard rendu
