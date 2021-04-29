@@ -1,4 +1,4 @@
-/* 
+/*
 Imports and config
 */
     // Vue
@@ -10,7 +10,7 @@ Imports and config
     import store from '../store';
 //
 
-/* 
+/*
 Router definitions
 */
     // Routes collection
@@ -28,6 +28,27 @@ Router definitions
             path: '/login',
             name: 'Login',
             component: () => import('../views/Login.vue')
+        },
+
+        {
+            // Define a route param
+            path: '/add/post',
+            name: 'AddPost',
+            component: () => import('../views/AddPost.vue')
+        },
+
+        {
+            // Define a route param
+            path: '/update/post/:id',
+            name: 'UpdatePost',
+            component: () => import('../views/UpdatePost.vue')
+        },
+
+        {
+            // Define a route param
+            path: '/delete/post/:id',
+            name: 'DeletePost',
+            component: () => import('../views/DeletePost.vue')
         },
 
         {
@@ -53,7 +74,7 @@ Router definitions
 //
 
 
-/* 
+/*
 Set basic AuthGuard with store getters
 */
     router.beforeEach((to, from, next) => {
@@ -68,7 +89,7 @@ Set basic AuthGuard with store getters
 //
 
 
-/* 
+/*
 Export Router
 */
     export default router

@@ -3,22 +3,13 @@
     <h1>{{post.headline}}</h1>
     <p>{{post.body}}</p>
     <p><i>© Author : </i>{{post.author.givenName}} {{post.author.familyName}}</p>
-    <ul class="commentList">
-      <h2>Commentaire(s)</h2>
-      <li v-for="item of post.comments" :key="item._id">
-        <div class="flexBox flexCenter spaceBetween">
-          <p>{{item.creationDate}}</p>
-          <p>{{item.content}}</p>
-          <p>{{item._id}}</p>
-        </div>
-      </li>
-  </ul>
+    <button type="submit" @click="click($event)">DELETE</button>
   </main>
 </template>
 
 <script>
   export default {
-    name: "Post",
+    name: "DeletePost",
     components: {
     },
     data(){
@@ -26,7 +17,13 @@
         post: undefined
       }
     },
-    methods:{},
+    methods:{
+      click(event){
+        console.log(this.$route.params.id);
+        event.preventDefault();
+        this.$store.dispatch('fetchDeletePost', this.$route.params.id);
+      }
+    },
 
     created(){
       // Get post data from route param

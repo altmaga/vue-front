@@ -1,4 +1,4 @@
-/* 
+/*
 Imports and config
 */
     // Vue
@@ -9,6 +9,7 @@ Imports and config
     // Inner
     import auth from "./modules/auth";
     import post from "./modules/post";
+    import comment from "./modules/comment";
 
     // Set up Vuex
     Vue.use(Vuex);
@@ -16,13 +17,14 @@ Imports and config
 
 
 
-/* 
+/*
 Export store
 */
     export default new Vuex.Store({
         modules: {
             auth,
-            post
+            post,
+            comment
         },
         plugins: [
             createPersistedState()
